@@ -13,7 +13,7 @@ public class MoverPalas : MonoBehaviour
     void Start()
     {
         miTransform2 = this.transform;
-        velocidad = 2;
+        velocidad = 3;
     }
 
     // Update is called once per frame

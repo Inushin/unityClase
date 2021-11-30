@@ -41,10 +41,14 @@ public class MoverPelota : MonoBehaviour
         else if (collision.transform.tag.Equals("BloqueArriba") || collision.transform.tag.Equals("BloqueAbajo"))
         {
             _velocidad.y *= -1;
+            Destroy(collision.transform.parent.gameObject);
+            GameObject.Find("Padre").gameObject.GetComponent<Control>().ComprobarHijos();
         }
         else if (collision.transform.tag.Equals("BloqueLaterales"))
         {
             _velocidad.x *= -1;
+            Destroy(collision.transform.parent.gameObject);
+            GameObject.Find("Padre").gameObject.GetComponent<Control>().ComprobarHijos();
         }
 
 
