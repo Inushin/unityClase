@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/Continuar.unity
+- path: Assets/Scenes/Arkanoid.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
