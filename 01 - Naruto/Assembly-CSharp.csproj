@@ -53,10 +53,13 @@
     <UnityVersion>2020.3.23f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\FollowPlayer.cs" />
     <Compile Include="Assets\Scripts\ControlPj.cs" />
-    <Compile Include="Assets\quietocorrer.cs" />
     <Compile Include="Assets\Scripts\PlataformaMovil.cs" />
+    <Compile Include="Assets\quietocorrer.cs" />
+    <Compile Include="Assets\Scripts\FollowPlayer.cs" />
+    <Compile Include="Assets\Scripts\MoverShuriken.cs" />
+    <Compile Include="Assets\Scripts\Rotar.cs" />
+    <Compile Include="Assets\Scripts\PullObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

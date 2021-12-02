@@ -20,6 +20,11 @@ public class ControlPj : MonoBehaviour
     public Transform izquierdaArriba, derechaAbajo;
     public LayerMask plataforma;
 
+    //variables para disparo
+
+    public Transform posShuriken;
+    public GameObject miPoolShurikens;
+
     void Start()
     {
         Time.timeScale = 1;
@@ -55,6 +60,9 @@ public class ControlPj : MonoBehaviour
         {
             _velocidad = velocidad;
             miTransform.localScale = new Vector3(1, 1, 1);
+        } else if(Input.GetKey(KeyCode.F))
+        {
+            miAnimator.SetTrigger("disparo");
         }
     }
 
@@ -78,6 +86,11 @@ public class ControlPj : MonoBehaviour
     {
         if (miRigidbody.velocity.y < 0 || miRigidbody.velocity.y > 0)
             isGrounded = Physics2D.OverlapArea(izquierdaArriba.position, derechaAbajo.position, plataforma);
+    }
+
+    public void Disparo()
+    {
+        miPoolShurikens.GetComponent<PullObject>().CrearShurikens(posShuriken.position);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
