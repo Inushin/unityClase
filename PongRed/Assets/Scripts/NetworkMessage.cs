@@ -27,7 +27,8 @@ namespace NetworkMessage
 {
     public enum Commands
     {
-        HANDSHAKE
+        HANDSHAKE,
+        READY
     }
 
     [System.Serializable]
@@ -45,6 +46,18 @@ namespace NetworkMessage
         {
             command = Commands.HANDSHAKE;
             player = new NetworkObject.NetworkPlayer();
+        }
+    }
+
+    [System.Serializable]
+    public class ReadyMsg : NetworkHeader
+    {
+        public List<NetworkObject.NetworkPlayer> playerList;
+
+        public ReadyMsg()
+        {
+            command = Commands.READY;
+            playerList = new List<NetworkObject.NetworkPlayer>();
         }
     }
 
