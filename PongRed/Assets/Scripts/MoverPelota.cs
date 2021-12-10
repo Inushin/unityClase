@@ -25,12 +25,13 @@ public class MoverPelota : MonoBehaviour
         server.GetComponent<Server>().EnviarPosPelota(miTransform.position);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.transform.tag.Equals("jugador")) 
+        if (collision.transform.tag.Equals("jugador"))
         {
             _velocidad.x *= -1;
-        }else if (collision.transform.tag.Equals("laterales"))
+        }
+        else if (collision.transform.tag.Equals("laterales"))
         {
             _velocidad.x *= -1;
         }
@@ -38,6 +39,11 @@ public class MoverPelota : MonoBehaviour
         {
             _velocidad.y *= -1;
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+
     }
 
 
