@@ -6,68 +6,90 @@ using Unity.Collections;
 using System.Text;
 using Unity.Networking.Transport;
 using UnityEngine.UI;
-using System;
-using NetworkMessage;
+using NetworkMessages;
 using NetworkObject;
+using System;
 
 public class NetworkClient : MonoBehaviour
 {
-
     public NetworkDriver m_Driver;
-    public NetworkConnection m_connection;
+    public NetworkConnection m_Connection;
     private bool empezar = false;
-
-    [Header("IP del servidor")]
+    [Header("ip del servidor")]
     public string serverIP;
-    [Header("Puerto a la escucha")]
+    [Header("puerto a la escucha")]
     public ushort serverPort;
-    [Header("InputBox - (Escribir Usuario)")]
+    [Header("InputBox -(Escribir Usuario)")]
     public InputField inputNombre;
 
     public string idPlayer;
-
+    public GameObject panelPrincipal, panelJuego;
+    public GameObject[] jugadoresGameObject;
+    public GameObject pelota;
+    
 
     // Start is called before the first frame update
     public void Conectar()
     {
         m_Driver = NetworkDriver.Create();
-        m_connection = default(NetworkConnection);
+        m_Connection = default(NetworkConnection);
         var endpoint = NetworkEndPoint.Parse(serverIP, serverPort);
-        m_connection = m_Driver.Connect(endpoint);
+        m_Connection = m_Driver.Connect(endpoint);
 
         inputNombre.gameObject.SetActive(false);
         GameObject.Find("Button").SetActive(false);
         GameObject.Find("Text").GetComponent<Text>().text = "Esperando";
         empezar = true;
+
     }
 
     // Update is called once per frame
     void Update()
     {
         m_Driver.ScheduleUpdate().Complete();
-        if(!m_connection.IsCreated)
+        if(!m_Connection.IsCreated)
         {
             return;
         }
 
         DataStreamReader stream;
-        NetworkEvent.Type cmd = m_connection.PopEvent(m_Driver, out stream);
+        NetworkEvent.Type cmd = m_Connection.PopEvent(m_Driver, out stream);
 
-        while(cmd != NetworkEvent.Type.Empty)
+        while (cmd != NetworkEvent.Type.Empty) 
         {
-            if(cmd==NetworkEvent.Type.Connect)
+            if (cmd == NetworkEvent.Type.Connect)
             {
                 OnConnect();
             }
-            else if(cmd == NetworkEvent.Type.Data)
+            else if (cmd == NetworkEvent.Type.Data)
             {
                 OnData(stream);
             }
-            else if (cmd == NetworkEvent.Type.Disconnect)
+            else if (cmd==NetworkEvent.Type.Disconnect) 
             {
-
+                OnDisconnect();
             }
-            cmd = m_connection.PopEvent(m_Driver, out stream);
+            cmd = m_Connection.PopEvent(m_Driver, out stream);
+        }
+
+        if(Input.GetKey(KeyCode.E))
+        {
+            PlayerInputMsg playerInputMsg = new PlayerInputMsg();
+            playerInputMsg.id = idPlayer;
+            playerInputMsg.myInput = "EMPEZAR";
+            SendToServer(JsonUtility.ToJson(playerInputMsg));
+        } else if(Input.GetKey(KeyCode.UpArrow))
+        {
+            PlayerInputMsg playerInputMsg = new PlayerInputMsg();
+            playerInputMsg.id = idPlayer;
+            playerInputMsg.myInput = "ARRIBA";
+            SendToServer(JsonUtility.ToJson(playerInputMsg));
+        } else if (Input.GetKey(KeyCode.DownArrow))
+        {
+            PlayerInputMsg playerInputMsg = new PlayerInputMsg();
+            playerInputMsg.id = idPlayer;
+            playerInputMsg.myInput = "ABAJO";
+            SendToServer(JsonUtility.ToJson(playerInputMsg));
         }
     }
 
@@ -76,25 +98,51 @@ public class NetworkClient : MonoBehaviour
         Debug.Log("Conectado Correctamente");
     }
 
-    private void OnData(DataStreamReader stream)
-    {
+    private void OnData(DataStreamReader stream) {
         NativeArray<byte> bytes = new NativeArray<byte>(stream.Length, Allocator.Temp);
         stream.ReadBytes(bytes);
         string recMsg = Encoding.ASCII.GetString(bytes.ToArray());
         NetworkHeader header = JsonUtility.FromJson<NetworkHeader>(recMsg);
 
-        switch(header.command)
+        switch (header.command)
         {
             case Commands.HANDSHAKE:
                 HandshakeMsg mensajeRecibido = JsonUtility.FromJson<HandshakeMsg>(recMsg);
-
-                //Asigno la ID de la conexión en cliente para después enviar mensajes
+                //asigno la ide de la conexion en cliente, para despues enviar mensajes
                 idPlayer = mensajeRecibido.player.id;
-                //Genero un nuevo mensaje para enviar la información al servidor
+                //Genero un nuevo mensaje para enviar la infromacion al servidor
                 HandshakeMsg mensajeEnviar = new HandshakeMsg();
                 mensajeEnviar.player.nombre = inputNombre.text;
-
                 SendToServer(JsonUtility.ToJson(mensajeEnviar));
+                break;
+            case Commands.READY:
+                ReadyMsg readyMsg = JsonUtility.FromJson<ReadyMsg>(recMsg);
+                panelPrincipal.SetActive(false);
+                int numPlayers = readyMsg.playerList.Count;
+                panelJuego.SetActive(true);
+                for(int i = 0; i < numPlayers; i++)
+                {
+                    jugadoresGameObject[i].GetComponentInChildren<Text>().text = readyMsg.playerList[i].nombre;
+                }
+                break;
+            case Commands.PLAYERINPUT:
+                PlayerInputMsg playerInputRecibido = JsonUtility.FromJson<PlayerInputMsg>(recMsg);
+                if(playerInputRecibido.myInput == "EMPEZAR")
+                {
+
+                }
+                break;
+            case Commands.MOVER_PALA:
+                MoverPalaMsg moverPalaMsg = JsonUtility.FromJson<MoverPalaMsg>(recMsg);
+                int idJugador;
+                int.TryParse(moverPalaMsg.jugador.id, out idJugador);
+                jugadoresGameObject[idJugador].transform.position = moverPalaMsg.jugador.posJugador;
+                break;
+            case Commands.UPDATE_PELOTA:
+                UpdatePelotaMsg updatePelotaMsg = JsonUtility.FromJson<UpdatePelotaMsg>(recMsg);
+                pelota.transform.position = updatePelotaMsg.posPelota;
+                SendToServer(JsonUtility.ToJson(updatePelotaMsg));
+
                 break;
             default:
                 Debug.Log("Mensaje desconocido");
@@ -105,10 +153,22 @@ public class NetworkClient : MonoBehaviour
     private void SendToServer(string v)
     {
         DataStreamWriter writer;
-        m_Driver.BeginSend(NetworkPipeline.Null, m_connection, out writer);
+        m_Driver.BeginSend(NetworkPipeline.Null,m_Connection, out writer);
         NativeArray<byte> bytes = new
             NativeArray<byte>(Encoding.ASCII.GetBytes(v), Allocator.Temp);
         writer.WriteBytes(bytes);
         m_Driver.EndSend(writer);
     }
+
+    private void OnDisconnect()
+    {
+        m_Connection = default(NetworkConnection);
+    }
+
+    public void OnDestroy()
+    {
+        m_Connection.Disconnect(m_Driver);
+        m_Driver.Dispose();
+    }
+
 }

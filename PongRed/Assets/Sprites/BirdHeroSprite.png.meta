@@ -1,16 +1,7 @@
 fileFormatVersion: 2
-guid: a9c136f9dcfd3954fa0f3fab6260607f
+guid: e34b9a4124a354b46a04204c5914dd7a
 TextureImporter:
-  internalIDToNameTable:
-  - first:
-      213: 8051579698515443948
-    second: BirdHero_0
-  - first:
-      213: 5775143000185782248
-    second: BirdHero_1
-  - first:
-      213: -2643538357942516794
-    second: BirdHero_2
+  internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -37,8 +28,8 @@ TextureImporter:
   generateCubemap: 6
   cubemapConvolution: 0
   seamlessCubemap: 0
-  textureFormat: -1
-  maxTextureSize: 1024
+  textureFormat: 1
+  maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
     filterMode: 1
@@ -50,7 +41,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -70,11 +61,11 @@ TextureImporter:
   compressionQualitySet: 0
   textureFormatSet: 0
   ignorePngGamma: 0
-  applyGammaDecoding: 1
+  applyGammaDecoding: 0
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 1024
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -86,74 +77,11 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: BirdHero_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 30
-        width: 128
-        height: 67
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ce082c2a315fcbf60800000000000000
-      internalID: 8051579698515443948
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BirdHero_1
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 30
-        width: 128
-        height: 67
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 8ef382de5fd652050800000000000000
-      internalID: 5775143000185782248
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BirdHero_2
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 30
-        width: 128
-        height: 67
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 6c387b89ed3405bd0800000000000000
-      internalID: -2643538357942516794
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 

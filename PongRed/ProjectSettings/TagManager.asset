@@ -4,9 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Arriba-Abajo
-  - Laterales
-  - Jugador
+  - arriba-abajo
+  - laterales
+  - jugador
   layers:
   - Default
   - TransparentFX

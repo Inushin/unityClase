@@ -17,8 +17,6 @@ ScriptsOnlyBuild:
     - UnityEditor.Tilemaps.TilemapPrefabStageHelper
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
-    Unity.Timeline.Editor.dll:
-    - TimelineProjectSettings
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
@@ -52,28 +50,30 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 48
       Script: {instanceID: 0}
+    - Class: 61
+      Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1530}
+      Script: {instanceID: 1544}
     - Class: 114
-      Script: {instanceID: 2256}
+      Script: {instanceID: 2082}
     - Class: 114
-      Script: {instanceID: 2680}
+      Script: {instanceID: 2382}
     - Class: 114
-      Script: {instanceID: 2852}
+      Script: {instanceID: 2856}
     - Class: 114
-      Script: {instanceID: 3084}
+      Script: {instanceID: 3046}
     - Class: 114
-      Script: {instanceID: 3142}
+      Script: {instanceID: 3316}
     - Class: 114
-      Script: {instanceID: 3332}
+      Script: {instanceID: 3384}
     - Class: 114
-      Script: {instanceID: 3450}
+      Script: {instanceID: 3616}
     - Class: 114
-      Script: {instanceID: 29900}
+      Script: {instanceID: 3744}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -81,6 +81,8 @@ ScriptsOnlyBuild:
     - Class: 157
       Script: {instanceID: 0}
     - Class: 196
+      Script: {instanceID: 0}
+    - Class: 212
       Script: {instanceID: 0}
     - Class: 213
       Script: {instanceID: 0}
@@ -97,6 +99,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: AnimationPlayableAsset
+  - hash:
+      serializedVersion: 2
+      Hash: 6e20c5ca2f01e9509e6c2a387c2c5f62
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: MoverPelota
   - hash:
       serializedVersion: 2
       Hash: a6e561615949734e9f12f9b61661f43e
@@ -169,6 +177,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_FontAsset
+  - hash:
+      serializedVersion: 2
+      Hash: cd3e3535557d798dc0eb58fbd192dffe
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: NetworkClient
   - hash:
       serializedVersion: 2
       Hash: c3d3430df9e3ea95e3e3d587961390fb
@@ -327,16 +341,16 @@ ScriptsOnlyBuild:
     className: BeforeAfterTestCommandState
   - hash:
       serializedVersion: 2
-      Hash: 0fd6822f6177297bd0eb4d83cc7a9030
-    assemblyName: UnityEngine.UI.dll
-    namespaceName: UnityEngine.UI
-    className: ToggleGroup
-  - hash:
-      serializedVersion: 2
       Hash: 69415240821be7986b27e72bf9609a30
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: Button
+  - hash:
+      serializedVersion: 2
+      Hash: 0fd6822f6177297bd0eb4d83cc7a9030
+    assemblyName: UnityEngine.UI.dll
+    namespaceName: UnityEngine.UI
+    className: ToggleGroup
   - hash:
       serializedVersion: 2
       Hash: 349d08daa6108b9a28f8c38fd40ce96f
@@ -537,6 +551,12 @@ ScriptsOnlyBuild:
     className: SpriteSkinEntity
   - hash:
       serializedVersion: 2
+      Hash: 105692e0577ab6b7f250232d0a402e30
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Server
+  - hash:
+      serializedVersion: 2
       Hash: 28cfb4bd305dd11c6326cc3ee7c14138
     assemblyName: Unity.2D.Animation.Runtime.dll
     namespaceName: UnityEngine.Experimental.U2D.Animation
@@ -607,19 +627,7 @@ ScriptsOnlyBuild:
     assemblyName: Unity.2D.IK.Runtime.dll
     namespaceName: UnityEngine.U2D.IK
     className: FabrikSolver2D
-  - hash:
-      serializedVersion: 2
-      Hash: ff025bc29b5ef15aa6ea3c1457edee54
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: Server
-  - hash:
-      serializedVersion: 2
-      Hash: 17a4f2aed5693dca3fbf1f5fc2ad039e
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: NetworkClient
   platform: 19
   scenePathNames:
   - Assets/Scenes/Client.unity
-  playerPath: C:/Users/almi/Desktop/DAM2/Unity/unityClase/PongRed/Cliente/PongRed.exe
+  playerPath: C:/Users/almi/PongRed/Cliente/PongRed.exe
