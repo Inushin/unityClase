@@ -28,7 +28,9 @@ namespace NetworkMessages
         READY,
         PLAYERINPUT,
         MOVER_PALA,
-        UPDATE_PELOTA
+        UPDATE_PELOTA,
+        EXPLOTAR,
+        GOL
     }
 
     [System.Serializable]
@@ -97,6 +99,29 @@ namespace NetworkMessages
 
     }
 
+    [System.Serializable]
+    public class ExplotarPelotaMsg : NetworkHeader
+    {
+        public Vector3 posPelota;
+        public ExplotarPelotaMsg()
+        {
+            command = Commands.EXPLOTAR;
+            posPelota = Vector3.zero;
+        }
+
+    }
+
+    [System.Serializable]
+    public class ActualizarMarcadoresMsg : NetworkHeader
+    {
+        public int[] goles;
+        public ActualizarMarcadoresMsg()
+        {
+            command = Commands.GOL;
+            
+        }
+
+    }
 
 }
 

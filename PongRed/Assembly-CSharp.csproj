@@ -56,8 +56,9 @@
     <Compile Include="Assets\Scripts\MoverPelota.cs" />
     <Compile Include="Assets\Scripts\NetworkClient.cs" />
     <Compile Include="Assets\Scripts\NetworkMessages.cs" />
-    <Compile Include="Assets\Scripts\Server.cs" />
     <Compile Include="Assets\Scripts\Rotar.cs" />
+    <Compile Include="Assets\Scripts\Server.cs" />
+    <Compile Include="Assets\Scripts\Explotar.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

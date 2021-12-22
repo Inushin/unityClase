@@ -26,6 +26,7 @@ public class NetworkClient : MonoBehaviour
     public GameObject panelPrincipal, panelJuego;
     public GameObject[] jugadoresGameObject;
     public GameObject pelota;
+    public GameObject explotar;
     
 
     // Start is called before the first frame update
@@ -142,6 +143,19 @@ public class NetworkClient : MonoBehaviour
                 UpdatePelotaMsg updatePelotaMsg = JsonUtility.FromJson<UpdatePelotaMsg>(recMsg);
                 pelota.transform.position = updatePelotaMsg.posPelota;
                 SendToServer(JsonUtility.ToJson(updatePelotaMsg));
+
+                break;
+            case Commands.EXPLOTAR:
+                ExplotarPelotaMsg explotarPelotaMsg = JsonUtility.FromJson<ExplotarPelotaMsg>(recMsg);
+                pelota.transform.position = explotarPelotaMsg.posPelota;
+                explotar.SetActive(true);
+                break;
+            case Commands.GOL:
+                ActualizarMarcadoresMsg actualizarMarcadores = JsonUtility.FromJson<ActualizarMarcadoresMsg>(recMsg);
+                for (int i = 0; i < 2; i++)
+                {
+                    marcadres[i].GetComponent<Text>().text
+                }
 
                 break;
             default:

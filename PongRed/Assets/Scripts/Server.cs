@@ -20,6 +20,7 @@ public class Server : MonoBehaviour
     public bool juegoEmpezado = false;
     public float velocidadPala;
     public GameObject pelota;
+    public int[] goles;
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +37,9 @@ public class Server : MonoBehaviour
         }
         m_connections = new NativeList<NetworkConnection>(16, Allocator.Persistent);
         jugadores = new List<NetworkObject.NetworkPlayer>();
+        goles[0] = 0;
+        goles[1] = 0;
+
     }
 
     // Update is called once per frame
@@ -200,6 +204,40 @@ public class Server : MonoBehaviour
         }
 
     
+    }
+
+
+    public void EnviarExplotar(Vector3 pos)
+    {
+        UpdatePelotaMsg explotarPelotaMsg = new UpdatePelotaMsg();
+        explotarPelotaMsg.posPelota = pos;
+        int numJugadores = jugadores.Count;
+        for (int i = 0; i < numJugadores; i++)
+        {
+            SendToClient(JsonUtility.ToJson(explotarPelotaMsg), m_connections[i]);
+        }
+
+
+    }
+
+    public void EnviarGol(Vector3 direccion)
+    {
+        ActualizarMarcadoresMsg actualizarMarcadores = new ActualizarMarcadoresMsg();
+
+        if (direccion.x>0)
+        {
+            goles[1] ++;
+        }else
+        {
+            goles[0]++;
+        }
+        actualizarMarcadores.goles = goles;
+        for (int i = 0; i < 2; i++)
+        {
+            SendToClient(JsonUtility.ToJson(actualizarMarcadores), m_connections[i]);
+        }
+
+
     }
 
     private void OnDisconnect(int i)

@@ -30,14 +30,18 @@ public class MoverPelota : MonoBehaviour
         if (collision.transform.tag.Equals("jugador"))
         {
             _velocidad.x *= -1;
+            server.GetComponent<Server>().EnviarExplotar(miTransform.position);
+
         }
         else if (collision.transform.tag.Equals("laterales"))
         {
             _velocidad.x *= -1;
+            miTransform.position = new Vector3(0, 0, 0);
         }
         else if (collision.transform.tag.Equals("arriba-abajo"))
         {
             _velocidad.y *= -1;
+            server.GetComponent<Server>().EnviarExplotar(miTransform.position);
         }
     }
 
